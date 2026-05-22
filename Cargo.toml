@@ -1,0 +1,5 @@
+[workspace]
+members = ["lib/comic2pdf"]
+
+# Shared dependencies across all crates (optional, minimizes version drift)
+[workspace.dependencies]
