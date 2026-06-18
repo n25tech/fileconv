@@ -28,11 +28,21 @@ check_file_arg() {
     fi
 }
 
+check_file_exists() {
+    local base_name="${input_filename%.*}"
+    if [ -f "${base_name}.mp4" ]; then
+            echo 'file already exists...skipping'
+    else
+            convert_to_mp4
+    fi
+}
+
+
 # The case statement now handles avi, wmv, mpg, and mpeg
 case "$action" in
     mp4|*mp4)
         check_file_arg
-        convert_to_mp4
+	check_file_exists
         ;;
     *)
         echo "Usage: $0 {command} <filename>"
