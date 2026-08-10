@@ -1,8 +1,7 @@
-
-use comic2pdf::add;
+use comic2pdf::{read_cbr_file};
 
 fn main() {
-    println!("Hello, world!");
-    let out = add(3, 2);
-    println!("{}", out);
+    let file = "/tmp/comics/V for Vendetta (Complete)/V for Vendetta 01 (1988) (c2c) (theProletariat-DCP).cbr".to_string();
+    let out = read_cbr_file(file);
+    println!("{:?}", out);
 }
