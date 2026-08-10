@@ -5,3 +5,10 @@ version = 4
 [[package]]
 name = "comic2pdf"
 version = "0.1.0"
+
+[[package]]
+name = "fileconv"
+version = "0.1.0"
+dependencies = [
+ "comic2pdf",
+]

@@ -1,0 +1,7 @@
+[package]
+name = "fileconv"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+comic2pdf = { path = "../../lib/comic2pdf" }
