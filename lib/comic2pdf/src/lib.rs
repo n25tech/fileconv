@@ -78,11 +78,11 @@ fn read_cbr_file<P: AsRef<path::Path>>(path: P) -> Result<Vec<(PathBuf, Vec<u8>)
     return Ok(list_of_files)
 }
 
-fn create_pdf_from_images(list_of_files: Vec<(PathBuf, Vec<u8>)>) -> Result<(), Box<dyn Error>> {
+fn create_pdf_from_images<P: AsRef<path::Path>>(list_of_files: Vec<(PathBuf, Vec<u8>)>, pdf_name: P) -> Result<(), Box<dyn Error>> {
     let mut document = Document::new();
 
     for (file, image_data) in list_of_files {
-        let interpolate = true;
+        let interpolate = false;
         let image = match file.extension().and_then(|s| s.to_str()) {
             Some("jpg") => Image::from_jpeg(image_data.into(), interpolate)?,
             Some("png") => Image::from_png(image_data.into(), interpolate)?,
@@ -105,13 +105,14 @@ fn create_pdf_from_images(list_of_files: Vec<(PathBuf, Vec<u8>)>) -> Result<(), 
         page.finish();
     }
     let pdf_bytes = document.finish()?;
-    std::fs::write("/tmp/output.pdf", &pdf_bytes)?;
+    std::fs::write(pdf_name, &pdf_bytes)?;
     Ok(())
 }
 
 pub fn cbr_to_pdf<P: AsRef<path::Path>>(file: P) -> Result<(), Box<dyn Error>> {
+    let pdf_name = file.as_ref().with_extension("pdf");
     let list_of_files = read_cbr_file(file)?;
-    let result = create_pdf_from_images(list_of_files);
+    let result = create_pdf_from_images(list_of_files, pdf_name);
     Ok(())
 }
 

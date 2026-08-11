@@ -5,3 +5,4 @@ edition = "2024"
 
 [dependencies]
 comic2pdf = { path = "../../lib/comic2pdf" }
+gflags.workspace = true
