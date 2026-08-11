@@ -5,6 +5,7 @@ resolver = "3"
 # Shared dependencies across all crates (optional, minimizes version drift)
 [workspace.dependencies]
 unrar = "0.5.8"
+krilla = "0.8.2"
 #printpdf = "0.7"
 #pdf-writer = "0.12"
 #rayon = "1.10"    # For blazing fast parallel image embedding
