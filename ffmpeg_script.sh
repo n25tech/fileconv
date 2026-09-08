@@ -37,6 +37,18 @@ check_file_exists() {
     fi
 }
 
+add_subtitles() {
+    # args
+    subtitle_file=$3
+    output_file=$4
+
+    # Check if the files actually exists
+    if [ ! -f "$subtitle_file" ]; then
+        echo "Error: File '$subtitle_file' not found."
+        exit 1
+    fi
+    ffmpeg -i $input_filename -i subtitle_file -c:v copy -c:a copy -c:s mov_text output.mp4
+}
 
 # The case statement now handles avi, wmv, mpg, and mpeg
 case "$action" in
@@ -44,6 +56,10 @@ case "$action" in
         check_file_arg
 	check_file_exists
         ;;
+    sub*)
+	check_file_arg
+	add_subtitles
+	;;
     *)
         echo "Usage: $0 {command} <filename>"
         echo "Commands:"
