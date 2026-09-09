@@ -44,7 +44,7 @@ add_subtitles() {
         echo "Error: File '$subtitle_file' not found."
         exit 1
     fi
-    ffmpeg -i $input_filename -i subtitle_file -c:v copy -c:a copy -c:s mov_text $output_file
+    ffmpeg -i "${input_filename}" -i "${subtitle_file}" -c:v copy -c:a copy -c:s mov_text "${output_file}"
 }
 
 # The case statement now handles avi, wmv, mpg, and mpeg
